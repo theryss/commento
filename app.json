@@ -1,0 +1,18 @@
+{
+  "name": "Commento",
+  "description": "A fast, privacy-focused commenting platform.",
+  "repository": "https://gitlab.com/commento/commento",
+  "logo": "https://cdn.commento.io/images/logo.svg",
+  "website": "https://commento.io",
+  "keywords": ["goalang", "commento", "privacy"],
+  "stack": "container",
+  "addons": [
+    {
+      "plan": "heroku-postgresql"
+    },
+    {
+      "plan": "papertrail:choklad"
+    }
+  ],
+  "success_url": "/login"
+}

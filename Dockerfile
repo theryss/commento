@@ -26,6 +26,7 @@ RUN make prod -j$(($(nproc) + 1))
 
 COPY ./db /commento/db
 WORKDIR /commento/db
+RUN export COMMENTO_POSTGRES=$(DATABASE_URL)
 RUN make prod -j$(($(nproc) + 1))
 
 
@@ -42,7 +43,8 @@ COPY --from=frontend-build /commento/frontend/build/prod/*.html /commento/
 COPY --from=templates-db-build /commento/templates/build/prod/templates /commento/templates/
 COPY --from=templates-db-build /commento/db/build/prod/db /commento/db/
 
-EXPOSE 8080
+COPY ./run.sh /commento/
+RUN chmod +x /commento/run.sh
 WORKDIR /commento/
 ENV COMMENTO_BIND_ADDRESS="0.0.0.0"
-ENTRYPOINT ["/commento/commento"]
+CMD ["sh", "/commento/run.sh"]
